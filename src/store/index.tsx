@@ -1,5 +1,4 @@
 import nextId from "react-id-generator";
-import {userStateInterface} from "../type";
 
 
 

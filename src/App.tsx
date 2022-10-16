@@ -1,52 +1,58 @@
-import React, {lazy, Suspense, useState} from "react";
-import { Navigate, Routes, Route, Link } from "react-router-dom";
+import React, {useState} from "react";
 import "./App.css";
-import {textType} from "./components/Page";
-let Admin = lazy(() => import('./components/Page'));
+import { BrowserRouter as Router, Route,Routes, NavLink , useLocation } from "react-router-dom";
 
 export default function App() {
-    const [flag , setFlag] = useState(false)
-    return (
-        <div className="App">
-                <nav>
-                    <Link to="/">Home</Link>
-                    <Link to="/admin">Admin</Link>
-                    <Link to="/admin1">Admin1</Link>
-                    <Link to="/admin2">Admin2</Link>
-                    <Link to="/admin3">Admin3</Link>
-                    <Link to="/admin4">Admin4</Link>
-                    {flag?<Navigate to={"/login"} replace={true}/>:<Navigate to="/admin" replace={true} />}
+    const [flag , setFlag] = useState(true)
 
+    return (
+        <Router>
+            <div>
+                <nav>
+                        <li><NavLink to="/login">Login</NavLink></li>
                 </nav>
-                <Suspense fallback="Loading…">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/admin" element={<Admin text = {"null"}  setFlag={setFlag}/>} />
-                        <Route path="/admin1" element={<Admin text = {"one"} setFlag={setFlag}/>} />
-                        <Route path="/admin2" element={<Admin text = {"two"}  setFlag={setFlag}/>} />
-                        <Route path="/admin3" element={<Admin text = {"three"}  setFlag={setFlag}/>} />
-                        <Route path="/admin4" element={<Admin text = {"four"}  setFlag={setFlag}/>} />
-                        <Route path="/login" element={<Login text = {"four"}  setFlag={setFlag}/>} />
-                    </Routes>
-                </Suspense>
+                <Routes>
+                     <Route path="/"  element={<Page text = "first"/>} />
+                     <Route path="/login"  element={<Login />} />
+                     <Route path="/products/:id" element={<Page text = 'id'/>} />
+                </Routes>
+            </div>
+        </Router>
+    );
+}
+type TextType = {
+    text:string
+}
+const Login = () => {
+    return (
+        <div>
+            <input type="text"/>
+            <button>ok</button>
+            <li><NavLink to="/">Home</NavLink>
+            </li>
         </div>
     );
-}
+};
 
-function Home() {
+const Page = ({text} : TextType) => {
+    const productName = useLocation()
+    let product = productName.pathname
+    console.log(product)
     return (
-        <main>
-            <h1>Hello CodeSandbox</h1>
-            <h2>Start editing to see some magic happen!</h2>
-        </main>
+        <div>
+            {text + product}
+
+            <ul>
+
+                <li><NavLink to="/products/apple">apple</NavLink>
+                </li>
+                <li><NavLink to="/products/pear">pear</NavLink>
+                </li>
+            </ul>
+        </div>
     );
-}function Login({text , setFlag}:textType) {
-    return (
-        <main>
-            <h1>Hello CodeSandbox</h1>
-            <button
-            onClick={()=>setFlag(prev=>!prev)}
-            >ok</button>
-        </main>
-    );
-}
+};
+
+
+
+

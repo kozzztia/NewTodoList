@@ -1,7 +1,9 @@
 .App {
   text-align: center;
   border: 1px solid #000;
-  max-width: 600px;
+  max-width: 500px;
   margin: 10px auto;
+  padding: 10px;
+  background: #eee;
 }
 

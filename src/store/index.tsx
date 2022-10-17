@@ -1,8 +1,7 @@
 import nextId from "react-id-generator";
 
 
-
-export const initialState= [
+export const state= [
      {
         user:"kozzztia",
         password:"12345",
@@ -19,7 +18,7 @@ export const initialState= [
     },
     {
         user:"user",
-        password:"1",
+        password:"user",
         isAuth: false,
         image: "https://www.brif.kz/blog/wp-content/uploads/166199_177974772235392_100000686101517_457836_4362528_n.jpg",
         userCount: 2,

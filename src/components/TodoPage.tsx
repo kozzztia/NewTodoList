@@ -9,7 +9,7 @@ const TodoPage = () => {
             <NavLink to={"/todo_page/3"}>TodoPage</NavLink>
             <NavLink to={"/todo_page/4"}>TodoPage</NavLink>
             <NavLink to={"/todo_page/5"}>TodoPage</NavLink>
-            <Outlet/>
+        <Outlet/>
         </div>
     );
 };

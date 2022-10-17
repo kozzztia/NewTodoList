@@ -1,32 +1,38 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./App.css";
-import {Route, Routes, NavLink} from "react-router-dom";
+import 'antd/dist/antd.css'
+import {Route, Routes, Navigate, Outlet, useNavigate} from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 import TodoPage from "./components/TodoPage";
 import Todo from "./components/Todo";
+import {state} from "./store";
 
 export default function App() {
-    const [flag , setFlag] = useState(true)
-
+    const [isAuth , setIsAuth] = useState(false)
+    const navigation = useNavigate()
+    useEffect(()=>{
+        !isAuth?navigation('./login'):navigation("./todo_page")
+    },[isAuth])
     return (
-        <div>
-            <nav>
-                <NavLink to={"/login"}>LoginForm</NavLink>
-                <NavLink to={"/todo_page"}>TodoPage</NavLink>
-            </nav>
+        <div className={"App"}>
 
-            <Routes>
-                <Route path={"/"}>
-                    <Route path={"/login"} element={<LoginForm/>}/>
-                    <Route path={"/todo_page"} element={<TodoPage/>}>
-                        <Route path={"/todo_page/:id"} element={<Todo/> }/>
-                        <Route path={"/todo_page/:id"} element={<Todo/> }/>
-                        <Route path={"/todo_page/:id"} element={<Todo/> }/>
-                        <Route path={"/todo_page/:id"} element={<Todo/> }/>
-                        <Route path={"/todo_page/:id"} element={<Todo/> }/>
-                    </Route>
-                </Route>
-            </Routes>
+
+                 <Routes>
+                        <Route path={"/login"} element={
+                            <LoginForm
+                                setIsAuth={setIsAuth}
+                                users={state}
+
+                            />
+                        }/>
+                        <Route path={"/todo_page"} element={<TodoPage />  }/>
+                            <Route path={"/todo_page/:id"} element={<Todo />  }/>
+                            <Route path={"/todo_page/:id"} element={<Todo />  }/>
+                            <Route path={"/todo_page/:id"} element={<Todo />  }/>
+                            <Route path={"/todo_page/:id"} element={<Todo />  }/>
+                            <Route path={"/todo_page/:id"} element={<Todo />  }/>
+                 </Routes>
+            <Outlet/>
         </div>
     );
 }

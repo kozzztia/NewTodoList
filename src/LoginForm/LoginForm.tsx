@@ -1,28 +1,26 @@
 import React from 'react';
-import {stateType} from "../store/type";
+
 import {Button, Divider, Form, Input} from "antd";
-
-type SetFlagTypes = {
-    setIsAuth :  React.Dispatch<React.SetStateAction<boolean>>,
-    users : stateType,
-}
+import {formValue, LoginFormInterface} from "./type";
 
 
 
-const LoginForm = ({setIsAuth , users} : SetFlagTypes) => {
-    const onIsAuthHandler = (e: React.SyntheticEvent<string>):void => {
-        setIsAuth(true)
-    }
+const LoginForm = ({users , setActiveUser , setIsAuth} : LoginFormInterface) => {
+
+    const onIsAuthHandler = (e: formValue):void => {
+
+        users.map(item => item.user === e.username && item.password === e.password &&
+            setActiveUser(item))}
     return (
         <>
-            <Divider orientation="left">Login form</Divider>
+            <Divider orientation="left" >Login form</Divider>
         <Form
             className="loginForm"
             name="basic"
             labelCol={{ span: 5 }}
             wrapperCol={{ span: 16 }}
             onFinish={(e)=>onIsAuthHandler(e)}
-            // autoComplete="off"
+            autoComplete="off"
         >
             <Form.Item
                 label="Username"
@@ -35,7 +33,6 @@ const LoginForm = ({setIsAuth , users} : SetFlagTypes) => {
             <Form.Item
                 label="Password"
                 name="password"
-
                 rules={[{ required: true, message: 'Please input your password!' }]}
             >
                 <Input.Password />

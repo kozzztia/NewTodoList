@@ -5,7 +5,6 @@ export const state= [
      {
         user:"kozzztia",
         password:"12345",
-        isAuth: false,
         image: "https://geekhero.ru/wp-content/uploads/2013/03/1335941056_tumblr_l6axf1ejxh1qckjsho1_500-250x250.jpg",
         userCount: 1,
         userId: nextId,
@@ -19,7 +18,6 @@ export const state= [
     {
         user:"user",
         password:"user",
-        isAuth: false,
         image: "https://www.brif.kz/blog/wp-content/uploads/166199_177974772235392_100000686101517_457836_4362528_n.jpg",
         userCount: 2,
         userId: nextId,

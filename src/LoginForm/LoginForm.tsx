@@ -1,25 +1,28 @@
 import React from 'react';
 
 import {Button, Divider, Form, Input} from "antd";
-import {formValue, LoginFormInterface} from "./type";
+import {useNavigate} from "react-router-dom";
 
+interface LoginFormInterface {
+    setIsAuth : React.Dispatch<React.SetStateAction<boolean>>
+}
 
-
-const LoginForm = ({users , setActiveUser , setIsAuth} : LoginFormInterface) => {
-
-    const onIsAuthHandler = (e: formValue):void => {
-
-        users.map(item => item.user === e.username && item.password === e.password &&
-            setActiveUser(item))}
+const LoginForm = ({setIsAuth} : LoginFormInterface ) => {
+    const navigate = useNavigate()
     return (
         <>
             <Divider orientation="left" >Login form</Divider>
+
         <Form
             className="loginForm"
             name="basic"
             labelCol={{ span: 5 }}
             wrapperCol={{ span: 16 }}
-            onFinish={(e)=>onIsAuthHandler(e)}
+            onFinish={(e)=>{
+                navigate("/todo_page")
+                setIsAuth(false)}
+            }
+
             autoComplete="off"
         >
             <Form.Item

@@ -4,18 +4,15 @@ import {NavLink, Outlet, Route , Navigate} from "react-router-dom";
 type isAuthType = {
     isAuth : boolean
 }
-const TodoPage = ({isAuth}:isAuthType) => {
-    if (isAuth)
-        return <Navigate to="/login" />
+
+const numbers = [1,2,3,4,5,6,7,8]
+const TodoPage = () => {
     return (
-        <div>
-            <NavLink to={"todo_page/1"}>TodoPage</NavLink>
-            <NavLink to={"todo_page/2"}>TodoPage</NavLink>
-            <NavLink to={"todo_page/3"}>TodoPage</NavLink>
-            <NavLink to={"todo_page/4"}>TodoPage</NavLink>
-            <NavLink to={"todo_page/5"}>TodoPage</NavLink>
+        <ul>
+            {numbers.map(item => <NavLink key = {item} to={`/${item}`}>Page {item}</NavLink>)}
+
         <Outlet/>
-        </div>
+        </ul>
     );
 };
 

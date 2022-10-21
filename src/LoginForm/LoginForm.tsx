@@ -7,7 +7,7 @@ interface LoginFormInterface {
     setIsAuth : React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const LoginForm = ({setIsAuth} : LoginFormInterface ) => {
+const LoginForm = () => {
     const navigate = useNavigate()
     return (
         <>
@@ -18,10 +18,8 @@ const LoginForm = ({setIsAuth} : LoginFormInterface ) => {
             name="basic"
             labelCol={{ span: 5 }}
             wrapperCol={{ span: 16 }}
-            onFinish={(e)=>{
-                navigate("/todo_page")
-                setIsAuth(false)}
-            }
+            onFinish={(e)=> navigate("/todo_page")}
+
 
             autoComplete="off"
         >

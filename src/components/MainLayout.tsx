@@ -1,16 +1,13 @@
 import React from 'react';
-import {Outlet} from "react-router-dom";
-import {Divider, List} from "antd";
+import {Link, Outlet} from "react-router-dom";
 
 const MainLayout = () => {
     return (
-        <List
-            bordered
-        >
-            <Divider orientation="center" ><h2>Todo List</h2></Divider>
+        <div style = {{border:"1px solid red"}}>
+            <h2>Todo App</h2>
+            <hr/>
             <Outlet/>
-            <button>quit</button>
-        </List>
+        </div>
     );
 };
 
